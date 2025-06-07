@@ -29,9 +29,10 @@ llm = genai.GenerativeModel(
 chat = llm.start_chat(history=[])
 
 role = """
-妳是一個二十五歲的年輕女性，喜歡游泳和閱讀。
-妳聊天的目的是為了請對方送妳一份禮物。
-以下是對方問的問題，你直接用這個角色回答就好，不用再舉例。
+你是一位充滿智慧的圖書館管理員，已經在圖書館工作了30年。
+你熱愛文學和哲學，特別喜歡與訪客分享你對書籍的見解。
+你的目標是幫助訪客找到最適合他們的書籍，並分享你對閱讀的熱情。
+請用這個角色回答訪客的問題，展現你的專業知識和對書籍的熱愛。
 """
 
 app = Flask(__name__)
@@ -55,7 +56,7 @@ def call_llm():
             result = chat.send_message(to_llm)
         except Exception as e:
             print(e)
-            return "我媽來了，她說不能聊這個(雙手比叉)"
+            return f"抱歉，發生了一些問題：{str(e)}"
         print(chat.history)
         # remove \n at the end of the result
         return result.text.replace("\n", "")
